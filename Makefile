@@ -1,0 +1,30 @@
+#==========PATH 
+YML_PATH	=	./srcs/docker-compose.yml
+VOLUME_PATH	=	/home/alee/data
+
+
+#==========Command
+all:
+		mkdir -p $(VOLUME_PATH)/mariadb
+		mkdir -p $(VOLUME_PATH)/wordpress
+		sudo docker compose -f $(YML_PATH) up -d --build
+
+up:
+		sudo docker compose -f $(YML_PATH) up --build
+
+down:
+		sudo docker compose -f $(YML_PATH) down
+
+stop:
+		sudo docker compose -f $(YML_PATH) stop
+
+clean: stop
+		sudo docker compose -f $(YML_PATH) down -v
+
+fclean: clean
+		sudo rm -rf $(VOLUME_PATH)/mariadb
+		sudo rm -rf $(VOLUME_PATH)/wordpress
+		sudo docker rmi $$(docker images -q);
+		sudo docker system prune -af
+
+re: fclean all
