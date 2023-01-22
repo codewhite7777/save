@@ -2,7 +2,6 @@
 YML_PATH	=	./srcs/docker-compose.yml
 VOLUME_PATH	=	/home/alee/data
 
-
 #==========Command
 all:
 		mkdir -p $(VOLUME_PATH)/mariadb
